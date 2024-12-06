@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт викторинка</title>
+    <style>
+        body {
+            position: relative; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .button {
+            position: absolute; 
+            top: 20px; 
+            right: 10px; 
+            padding: 10px 20px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .right-text {
+            position: absolute;
+            top: -15px; 
+            right: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <form action="{% url 'result' %}" method="post">
+        {% csrf_token %}
+        <button class="button">Посмотреть результаты</button>
+    </form>
+<h1>Список Викторин</h1>
+<ul>
+{% for quiz in quizzes %}
+    <li><a href="{% url 'quiz' quiz_id=quiz.id %}">{{ quiz.title }}</a></li>
+{% endfor %}
+</ul>
+<p class="right-text">Добро пожаловать, {{ username }}!</p>
+</body>
+</html>

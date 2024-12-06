@@ -1,0 +1,19 @@
+<h1>Ваши результаты тестов</h1>
+<table>
+    <tr>
+        <th>Тест</th>
+        <th>|</th>
+        <th>Правильные ответы</th>
+    </tr>
+    {% for result in results %}
+    <tr>
+        <td>{{ result.Quiz.title }}</td>
+        <td>|</td>
+        <td>{{ result.correct_answers_count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<form action="{% url 'buttonclick' %}" method="post">
+    {% csrf_token %}
+    <button>Назад</button>
+</form>

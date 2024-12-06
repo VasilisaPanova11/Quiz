@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }}</title>
+</head>
+<body>
+<h1>{{ quiz.title }}</h1>
+<ul>
+{% for question in questions %}
+    <li><a href="{% url 'quiz' %}">{{ question.text }}</a></li>
+{% endfor %}
+</ul>
+<a href="{% url 'quiz_list' %}">Назад к списку викторин</a>
+</body>
+</html>

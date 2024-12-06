@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты викторины</title>
+</head>
+<body>
+    <h1>Ваши ответы:</h1>
+    <ul>
+        {% for question_id, result in results.items %}
+            <li>
+                Вопрос {{ question_id }}: {{ result.answer }} - 
+                {% if result.is_correct %}
+                    <span style="color: green;">Правильный ответ!</span>
+                {% else %}
+                    <span style="color: red;">Неправильный ответ.</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'buttonclick' %}">Назад к списку викторин</a>
+</body>
+</html>

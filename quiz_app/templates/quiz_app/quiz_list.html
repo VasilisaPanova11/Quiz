@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт викторинка</title>
+    <style>
+        body {
+            position: relative; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .button {
+            position: absolute; 
+            top: 10px; 
+            right: 55px; 
+            padding: 10px 20px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .button1 {
+            position: absolute; 
+            top: 50px; 
+            right: 10px; 
+            padding: 10px 24px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <button class="button">Войти</button>
+    </form>
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <button class="button1">Зарегистрироваться</button>
+</form>
+</body>
+</html>
