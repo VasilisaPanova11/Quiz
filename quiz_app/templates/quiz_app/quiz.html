@@ -6,11 +6,38 @@
     <title>Викторина</title>
 </head>
 <body>
+    <script>
+    let startTime = Date.now();
+    let timerInterval; 
+    </script>
     <h1>Выберите ответы на вопросы</h1>
-    <form method="post">
+    <div id="timer">0 секунд</div>
+    <form method="post" id="quiz-id">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Отправить</button>
+        <input type="hidden" id="total_time" name="total_time" value="0">
+        <button type="submit" id="submit-button">Отправить</button>
     </form>
+    <script>
+        function updateTimer() {
+            let elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Вычисляем прошедшее время в секундах
+            document.getElementById("timer").innerText = elapsedTime + " секунд"; // Обновляем текст на странице
+        }
+    
+        function submitForm() {
+            let endTime = Date.now();
+            let totalTime = Math.floor((endTime - startTime) / 1000); 
+            document.getElementById("total_time").value = totalTime;
+            clearInterval(timerInterval); // Останавливаем таймер перед отправкой формы
+            document.getElementById("quiz-id").submit();
+        }
+    
+        // Запускаем таймер, обновляя его каждую секунду
+        timerInterval = setInterval(updateTimer, 1000);
+    
+        // Привязываем функцию submitForm к кнопке завершения
+        document.getElementById("submit-button").onclick = submitForm;
+    </script>
+    </script>
 </body>
 </html>

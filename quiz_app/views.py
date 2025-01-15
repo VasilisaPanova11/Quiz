@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from .models import Quiz, QuizResult, CustomUser
 from .serializers import CustomUserSerializer
 from .forms import QuizForm, CustomUserCreationForm, LoginForm
+from django.utils import timezone
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
@@ -67,15 +68,19 @@ def quiz_view(request, quiz_id):
         if form.is_valid():
             selected_answers = {key: form.cleaned_data[key] for key in form.cleaned_data}
             results = {}
+            count_question = 0
             for question_id, answer in selected_answers.items():
                 is_correct = answer.is_correct
-                if answer.is_correct:
+                count_question += 1
+                if is_correct:
                     correct_count += 1
                 results[question_id] = {
                     'answer': answer,
                     'is_correct': is_correct,
                 }
-            QuizResult.objects.create(User=request.user, Quiz=quiz, correct_answers_count=correct_count)
+            total_time_seconds = request.POST.get('total_time', 0)
+
+            QuizResult.objects.create(User=request.user, Quiz=quiz, how_many_questions=count_question, correct_answers_count=correct_count, total_time=timezone.timedelta(seconds=int(total_time_seconds)))
             context = {
                 'selected_answers': selected_answers,
                 'results': results,

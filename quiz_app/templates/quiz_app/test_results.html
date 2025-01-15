@@ -4,12 +4,16 @@
         <th>Тест</th>
         <th>|</th>
         <th>Правильные ответы</th>
+        <th>|</th>
+        <th>Общее время</th>
     </tr>
     {% for result in results %}
     <tr>
         <td>{{ result.Quiz.title }}</td>
         <td>|</td>
-        <td>{{ result.correct_answers_count }}</td>
+        <td>{{ result.correct_answers_count }} из {{ result.how_many_questions }}</td>
+        <td>|</td>
+        <td>{{ result.total_time }}</td>
     </tr>
     {% endfor %}
 </table>

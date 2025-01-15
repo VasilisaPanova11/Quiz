@@ -12,9 +12,9 @@
             <li>
                 Вопрос {{ question_id }}: {{ result.answer }} - 
                 {% if result.is_correct %}
-                    <span style="color: green;">Правильный ответ!</span>
+                    <span style="color: green;">Правильный ответ! - </span>
                 {% else %}
-                    <span style="color: red;">Неправильный ответ.</span>
+                    <span style="color: red;">Неправильный ответ. - </span>
                 {% endif %}
             </li>
         {% endfor %}
